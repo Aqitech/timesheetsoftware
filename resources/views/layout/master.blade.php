@@ -18,6 +18,7 @@
   <link href="{{ asset('/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('/plugins/datetimepicker/css/classic.css') }}" rel="stylesheet" />
   <link href="{{ asset('/plugins/datetimepicker/css/classic.time.css') }}" rel="stylesheet" />
+  <link href="{{ asset('/plugins/datetimepicker/css/classic.date.css') }}" rel="stylesheet" />
 
   <!-- CSS Files -->
   <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -77,6 +78,14 @@
               <ion-icon class="bx bx-spreadsheet"></ion-icon>
             </div>
             <div class="menu-title">Time Sheet</div>
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('report',['id' => Auth::User()->id]) }}">
+            <div class="parent-icon">
+              <i class="fadeIn animated bx bx-history"></i>
+            </div>
+            <div class="menu-title">Report</div>
           </a>
         </li>
       </ul>
@@ -212,9 +221,7 @@
   <script src="{{ asset('/plugins/datetimepicker/js/picker.date.js') }}"></script>
   <script src="{{ asset('/js/form-date-time-pickes.js') }}"></script>
   <script src="{{ asset('/js/index.js') }}"></script>
-  @if(Route::is('timesheet'))
   @yield('page-script')
-  @endif
   <script>
     $(document).ready(function () {
         toastr.options.timeOut = 10000;
@@ -229,8 +236,6 @@
   </script>
   <!-- Main JS-->
   <script src="{{ asset('/js/main.js') }}"></script>
-
-
 </body>
 
 </html>

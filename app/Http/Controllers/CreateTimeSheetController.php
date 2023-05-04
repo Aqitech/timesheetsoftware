@@ -15,11 +15,11 @@ class CreateTimeSheetController extends Controller
 
         // Get the current time in AM/PM format
         $current_pak_time = $current_time->format('h:i A');
-        $current_pak_date = $current_time->format('d-m-Y');
+        $current_pak_date = $current_time->format('Y-m-d');
         $current_pak_day = $current_time->format('l');
 
         // Get the users who are currently on shift
-        $users_on_shift = User::where('start_time', '<=', $current_pak_time)->get();
+        $users_on_shift = User::where('start_time', '=', $current_pak_time)->where('is_deleted', 'N')->where('status', 'A')->get();
 
         // Create a new entry in the timesheet table for each user on shift
         foreach ($users_on_shift as $user) {

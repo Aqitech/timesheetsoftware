@@ -49,5 +49,7 @@ Route::controller(TimeSheetController::class)->group(function() {
     Route::get('/timesheet/{id}', 'timesheet')->name('timesheet');
     Route::post('/addtimesheet/{id}', 'addtimesheet')->name('addtimesheet');
     Route::post('/edittimesheet/{id}', 'edittimesheet')->name('edittimesheet');
+    Route::get('/report/{id}', 'report')->name('report');
+    Route::post('/search', 'search')->name('search');
 });
  

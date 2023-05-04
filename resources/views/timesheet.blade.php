@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $todaySheet->date }}</td>
+                                <td>{{ date('d-m-Y', strtotime($todaySheet->date)) }}</td>
                                 <td>{{ $todaySheet->day }}</td>
                                 <td>
                                     @if(!$todaySheet->first_thirtymin)
@@ -48,7 +48,7 @@
                                 </td>
                                 <td>
                                     @if(!$todaySheet->second_thirtymin)
-                                    <button name="second_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="second_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
                                     <div class="d-flex flex-column align-items-center flex-wrap">
                                         <p class="fw-bold">{{ ucfirst($todaySheet->second_thirtymin) }}</p>
@@ -58,7 +58,7 @@
                                 </td>
                                 <td>
                                     @if(!$todaySheet->third_thirtymin)
-                                    <button name="third_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="third_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
                                     <div class="d-flex flex-column align-items-center flex-wrap">
                                         <p class="fw-bold">{{ ucfirst($todaySheet->third_thirtymin) }}</p>
@@ -68,107 +68,152 @@
                                 </td>
                                 <td>
                                     @if(!$todaySheet->fourth_thirtymin)
-                                    <button name="fourth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="fourth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->fourth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->fourth_thirtymin) }}</p>
+                                        <button name="fourth_thirtymin" value="{{ $todaySheet->fourth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->fifth_thirtymin)
-                                    <button name="fifth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="fifth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->fifth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->fifth_thirtymin) }}</p>
+                                        <button name="fifth_thirtymin" value="{{ $todaySheet->fifth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->sixth_thirtymin)
-                                    <button name="sixth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="sixth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->sixth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->sixth_thirtymin) }}</p>
+                                        <button name="sixth_thirtymin" value="{{ $todaySheet->sixth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->seventh_thirtymin)
-                                    <button name="seventh_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="seventh_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->seventh_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->seventh_thirtymin) }}</p>
+                                        <button name="seventh_thirtymin" value="{{ $todaySheet->seventh_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->eighth_thirtymin)
-                                    <button name="eighth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="eighth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->eighth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->eighth_thirtymin) }}</p>
+                                        <button name="eighth_thirtymin" value="{{ $todaySheet->eighth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->nineth_thirtymin)
-                                    <button name="nineth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="nineth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->nineth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->nineth_thirtymin) }}</p>
+                                        <button name="nineth_thirtymin" value="{{ $todaySheet->nineth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->tenth_thirtymin)
-                                    <button name="tenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="tenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->tenth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->tenth_thirtymin) }}</p>
+                                        <button name="tenth_thirtymin" value="{{ $todaySheet->tenth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->eleventh_thirtymin)
-                                    <button name="eleventh_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="eleventh_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->eleventh_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->eleventh_thirtymin) }}</p>
+                                        <button name="eleventh_thirtymin" value="{{ $todaySheet->eleventh_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->twelveth_thirtymin)
-                                    <button name="twelveth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="twelveth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->twelveth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->twelveth_thirtymin) }}</p>
+                                        <button name="twelveth_thirtymin" value="{{ $todaySheet->twelveth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->thirteenth_thirtymin)
-                                    <button name="thirteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="thirteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->thirteenth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->thirteenth_thirtymin) }}</p>
+                                        <button name="thirteenth_thirtymin" value="{{ $todaySheet->thirteenth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->fourteenth_thirtymin)
-                                    <button name="fourteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="fourteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->fourteenth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->fourteenth_thirtymin) }}</p>
+                                        <button name="fourteenth_thirtymin" value="{{ $todaySheet->fourteenth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->fifteenth_thirtymin)
-                                    <button name="fifteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="fifteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->fifteenth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->fifteenth_thirtymin) }}</p>
+                                        <button name="fifteenth_thirtymin" value="{{ $todaySheet->fifteenth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->sixteenth_thirtymin)
-                                    <button name="sixteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="sixteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->sixteenth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->sixteenth_thirtymin) }}</p>
+                                        <button name="sixteenth_thirtymin" value="{{ $todaySheet->sixteenth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->seventieth_thirtymin)
-                                    <button name="seventieth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="seventieth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->seventieth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->seventieth_thirtymin) }}</p>
+                                        <button name="seventieth_thirtymin" value="{{ $todaySheet->seventieth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!$todaySheet->eighteenth_thirtymin)
-                                    <button name="eighteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                                    <button name="eighteenth_thirtymin" type="button" class="btn btn-primary modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fadeIn animated bx bx-plus"></i>Add</button>
                                     @else
-                                    {{ ucfirst($todaySheet->eighteenth_thirtymin) }}
+                                    <div class="d-flex flex-column align-items-center flex-wrap">
+                                        <p class="fw-bold">{{ ucfirst($todaySheet->eighteenth_thirtymin) }}</p>
+                                        <button name="eighteenth_thirtymin" value="{{ $todaySheet->eighteenth_thirtymin }}" type="button" class="btn btn-primary editmodalButton" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fadeIn animated bx bx-edit"></i>Edit</button>
+                                    </div>
                                     @endif
                                 </td>
                             </tr>
