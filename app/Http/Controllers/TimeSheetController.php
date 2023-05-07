@@ -85,10 +85,11 @@ class TimeSheetController extends Controller {
         $userId = $request->userId;
 
         $results = DB::table('time_sheets')->where('user_id', '=', $userId)->whereDate('date', '>=', $fromDate)->whereDate('date', '<=', $toDate)->get();
-        dd($results);
-
-
-
-        return response()->json($results);
+        if ($results->isEmpty()) {
+            return response()->json(['message' => 'No results found']);
+        } else {
+            return response()->json($results);
+        }
+        // return response()->json($results);
     }
 }

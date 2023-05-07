@@ -55,19 +55,9 @@
                                 @endfor
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="searchResults"></tbody>
                     </table>
                 </div>
-                <div id="searchResults"></div>
             </div>
         </div>
     </div>
@@ -117,64 +107,50 @@
                         toDate: toDate,
                         userId: userId
                     },
-                    success: function(data) {
-                        $('#searchResults').html(data);
+                    success: function(response) {
+                        if (response.hasOwnProperty('message')) {
+                            displayMessage(response.message);
+                        } else {
+                            displayResults(response);
+                        }
                     }
                 });
             }
         });
+        function displayResults(results) {
+            if (results.length == 0) {
+                $('#searchResults').html('<div>No results found</div>');
+            }
+            var resultsHtml = '';
+            $.each(results, function(index, item) {
+                resultsHtml +=  '<tr>' +
+                                    '<td>'+ item.date +'</td>' +
+                                    '<td>'+ item.day +'</td>' +
+                                    '<td>'+ item.first_thirtymin +'</td>' +
+                                    '<td>'+ item.second_thirtymin +'</td>' +
+                                    '<td>'+ item.third_thirtymin +'</td>' +
+                                    '<td>'+ item.fourth_thirtymin +'</td>' +
+                                    '<td>'+ item.fifth_thirtymin +'</td>' +
+                                    '<td>'+ item.sixth_thirtymin +'</td>' +
+                                    '<td>'+ item.seventh_thirtymin +'</td>' +
+                                    '<td>'+ item.eighth_thirtymin +'</td>' +
+                                    '<td>'+ item.nineth_thirtymin +'</td>' +
+                                    '<td>'+ item.tenth_thirtymin +'</td>' +
+                                    '<td>'+ item.eleventh_thirtymin +'</td>' +
+                                    '<td>'+ item.twelveth_thirtymin +'</td>' +
+                                    '<td>'+ item.thirteenth_thirtymin +'</td>' +
+                                    '<td>'+ item.fourteenth_thirtymin +'</td>' +
+                                    '<td>'+ item.fifteenth_thirtymin +'</td>' +
+                                    '<td>'+ item.sixteenth_thirtymin +'</td>' +
+                                    '<td>'+ item.seventieth_thirtymin +'</td>' +
+                                    '<td>'+ item.eighteenth_thirtymin +'</td>' +
+                                '</tr>';
+            });
+            $('#searchResults').html(resultsHtml);
+        }
+        function displayMessage(message) {
+            $('#searchResults').html('<h3 class="fw-bold">' + message + '</h3>');
+        }
     });
 </script>
-{{-- <script>
-    $(document).ready(function() {
-        $('#searchForm input').on('input', function() {
-            var fromDate = $('#fromDate').val();
-            var toDate = $('#toDate').val();
-            
-            // If the fromDate input has a value, remove the error message
-            if (fromDate !== '') {
-                $('#fromDateError').text('');
-            }
-            
-            // If the toDate input has a value, remove the error message
-            if (toDate !== '') {
-                $('#toDateError').text('');
-            }
-        });
-        
-        $('#searchForm').on('submit', function(event) {
-            event.preventDefault();
-
-            var fromDate = $('#fromDate').val();
-            var toDate = $('#toDate').val();
-            var userId = $('#userId').val();
-            var submit = true;
-            
-            if (fromDate == '') {
-                $('#fromDateError').text('Please select from date');
-                submit = false;
-            }
-            if (toDate == '') {
-                $('#toDateError').text('Please select to date');
-                submit = false;
-            }
-            
-            if (submit) {
-                $.ajax({
-                    url: '/search',
-                    type: 'POST',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        userId: userId
-                    },
-                    success: function(data) {
-                        $('#searchResults').html(data);
-                    }
-                });
-            }
-        });
-    });
-</script> --}}
 @endsection
