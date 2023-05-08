@@ -45,7 +45,7 @@
 					<div class="row g-3 mt-3">
 						<div class="col-md-6">
 							<label class="form-label" for="type_id">User Type</label>
-							<select class="form-select mb-3" aria-label="Default select example" name="type_id">
+							<select class="single-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true" name="type_id">
 			                	@foreach($userTypes as $userType)
 			                	<option value="{{ $userType->id }}">{{ ucfirst($userType->type) }}</option>
 			                	@endforeach

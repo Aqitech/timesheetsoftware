@@ -26,10 +26,8 @@
 	        		<div class="row g-3 mt-3">
 	        			<div class="col-md-12">
 							<label class="form-label" for="current_password">Current Password</label>
-							<input type="password" class="form-control" name="current_password">
-							@if ($errors->has('current_password'))
-							    <li class="list-group-item text-danger">{{ $errors->first('current_password') }}</li>
-							@endif
+							<input type="password" class="form-control" name="current_password" id="current_password">
+							<span id="check_current_password"></span>
 						</div>
 						<div class="col-md-12">
 							<label class="form-label" for="new_password">New Password</label>
@@ -56,4 +54,24 @@
     </div>
     <!-- end page content-->
 </div>
+@endsection
+@section('page-script')
+<script>
+	$(document).on('keyup','#current_password',function() {
+	    let current_password = $("#current_password").val();
+	    $.ajax({
+	        url:'checkCurrentPassword',
+	        type:'GET',
+	        data:{current_password:current_password},
+
+	        success:function(response){
+	            if (response.status == 404) {
+	                $("#check_current_password").html("<em><font color=red> Current Password is incorrect </font></em>");
+	            }else{
+	                $("#check_current_password").html("<em><font color=green> Current Password is correct </font></em>");
+	            }
+	        }
+	    });
+	});
+</script>
 @endsection

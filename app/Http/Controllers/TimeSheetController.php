@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Models\TimeSheet;
 use App\Models\User;
@@ -10,6 +11,11 @@ use Session;
 use DB;
 
 class TimeSheetController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
 
     public function timesheet($id) {
         $user = User::find($id);
@@ -63,21 +69,28 @@ class TimeSheetController extends Controller {
         return redirect()->back();
     }
 
-    public function report($id) {
-        $user = User::where(['id' => $id, 'status' => 'A', 'is_deleted' => 'N'])->first();
-        $title = 'Report for '. ucfirst($user->name);
+    public function admin_report() {
+        $users = User::where(['is_deleted' => 'N', 'status' => 'A'])->get();
+        $title = 'Report';
+        
+        return view('report')->with(compact('title', 'users'));
+    }
 
+    public function user_search(Request $request) {
+        $user = User::where(['id' => $request->userId, 'status' => 'A', 'is_deleted' => 'N'])->first();
         $startTime = $user->start_time;
         $endTime = $user->end_time;
         $start = \Carbon\Carbon::parse($startTime);
         $end = \Carbon\Carbon::parse($endTime);
         $interval = $start->diffInMinutes($end);
         $intervals = ceil($interval / 30);
-        
-        return view('report')->with(compact('title','user','intervals','start'));
-    }
+        $thTags = '';
+        for ($i = 0; $i < $intervals; $i++) {
+            $startInterval = $start->copy()->addMinutes($i * 30)->format('h:i A');
+            $endInterval = $start->copy()->addMinutes(($i + 1) * 30)->format('h:i A');
+            $thTags .= "<th>$startInterval to $endInterval</th>";
+        }
 
-    public function search(Request $request) {
         $fromDateObj = Carbon::createFromFormat('j F, Y', $request->fromDate);
         $fromDate = $fromDateObj->format('Y-m-d');
         $toDateObj = Carbon::createFromFormat('j F, Y', $request->toDate);
@@ -88,8 +101,12 @@ class TimeSheetController extends Controller {
         if ($results->isEmpty()) {
             return response()->json(['message' => 'No results found']);
         } else {
-            return response()->json($results);
+            $data = [
+                'results' => $results,
+                'everyThirtyMin' => $thTags
+            ];
+
+            return response()->json($data);
         }
-        // return response()->json($results);
     }
 }

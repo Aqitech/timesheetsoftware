@@ -56,6 +56,17 @@ class AuthController extends Controller
         return Redirect()->route('index');
     }
 
+    public function checkcurrentpassword(Request $request){
+        if (Hash::check($request->current_password, Auth::User()->password)){
+            $status= 200;
+        }else{
+            $status=404;
+        }
+        return response()->json([
+            'status'=>$status 
+        ]);
+    }
+
     public function change_password() {
         if(Auth::check()) {
             $title = 'Change Password';
@@ -77,14 +88,17 @@ class AuthController extends Controller
             $input = $request->all();
             $user = User::find(Auth::user()->id);
 
-            if (!Hash::check($input['current_password'], $user->password)) {
-                Session::flash('success', 'Return error with current passowrd is not match.');
-                return redirect()->back();
-            }else{
-                User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+            if (Hash::check($input['current_password'], $user->password)) {
+                if ($input['new_password'] == $input['new_confirm_password']) {
+                    // Update password
+                    User::find(auth()->user()->id)->update(['password'=> Hash::make($input['new_password'])]);
 
-                $success = 'Password change successfully.';
-                return Redirect()->route('dashboard')->with(compact('success'));
+                    Session::flash('success','Password has been changed Successfully!');
+                }
+            }else{
+                Session::flash('danger','The New Password & Confirm you have entered does not match!');
+
+                return Redirect()->route('dashboard');
             }
         }
 

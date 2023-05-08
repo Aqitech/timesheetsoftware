@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Services\ShiftManager;
 
 class CheckShiftTimmingCron extends Command
 {
@@ -33,8 +34,9 @@ class CheckShiftTimmingCron extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
-    {
-        checkshifttimming::info("Cron is working fine!");
+    public function handle() {
+        $entries_created = ShiftManager::createEntriesForCurrentShift();
+
+        $this->info($entries_created . ' entries created successfully.');    
     }
 }

@@ -97,13 +97,15 @@ class UserController extends Controller
         return redirect()->route('users');
     }
 
-    public function delete_user($id) {
-        $user = User::find($id);
-        $user->is_deleted = 'Y';
-        $user->save();
-
-        Session::flash('success', 'User Deleted successfully!');
-        return redirect()->route('users');
+    public function delete_user(Request $request) {
+        if ($request->ajax()) {
+            $data = $request->all();
+            User::where('id',$data['userId'])->update(['is_deleted'=>'Y']);
+            return response()->json([
+                'status'=>true,
+                'message'=>'Record has been Deleted Successfully!'
+            ]);
+        }
     }
 
     public function user_status($id) {

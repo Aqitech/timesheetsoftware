@@ -23,6 +23,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->name('login');
     Route::get('logout', 'logout')->name('logout');
 
+    Route::get('/checkCurrentPassword', 'checkCurrentPassword')->name('checkCurrentPassword');
     Route::get('/change_password', 'change_password')->name('change_password');
     Route::post('/store_new_password', 'store_new_password')->name('store_new_password');
 
@@ -37,7 +38,7 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/store_user', 'store_user')->name('store_user');
     Route::get('/edit_user/{id}', 'edit_user')->name('edit_user');
     Route::post('/update_user/{id}', 'update_user')->name('update_user');
-    Route::get('/delete_user/{id}', 'delete_user')->name('delete_user');
+    Route::post('/delete_user', 'delete_user')->name('delete_user');
     Route::get('/user_status/{id}', 'user_status')->name('user_status');
 });
 
@@ -49,7 +50,7 @@ Route::controller(TimeSheetController::class)->group(function() {
     Route::get('/timesheet/{id}', 'timesheet')->name('timesheet');
     Route::post('/addtimesheet/{id}', 'addtimesheet')->name('addtimesheet');
     Route::post('/edittimesheet/{id}', 'edittimesheet')->name('edittimesheet');
-    Route::get('/report/{id}', 'report')->name('report');
-    Route::post('/search', 'search')->name('search');
+    Route::get('/report/', 'admin_report')->name('admin_report');
+    Route::post('/user_search', 'user_search')->name('user_search');
 });
  

@@ -19,6 +19,9 @@
   <link href="{{ asset('/plugins/datetimepicker/css/classic.css') }}" rel="stylesheet" />
   <link href="{{ asset('/plugins/datetimepicker/css/classic.time.css') }}" rel="stylesheet" />
   <link href="{{ asset('/plugins/datetimepicker/css/classic.date.css') }}" rel="stylesheet" />
+  <link href="{{ asset('/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
+  <link href="{{ asset('/plugins/sweet-alerts/css/sweetalert.css') }}" rel="stylesheet" />
 
   <!-- CSS Files -->
   <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -81,7 +84,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ route('report',['id' => Auth::User()->id]) }}">
+          <a href="{{ route('admin_report') }}">
             <div class="parent-icon">
               <i class="fadeIn animated bx bx-history"></i>
             </div>
@@ -220,6 +223,10 @@
   <script src="{{ asset('/plugins/datetimepicker/js/picker.time.js') }}"></script>
   <script src="{{ asset('/plugins/datetimepicker/js/picker.date.js') }}"></script>
   <script src="{{ asset('/js/form-date-time-pickes.js') }}"></script>
+  <script src="{{ asset('/plugins/select2/js/select2.min.js') }}"></script>
+  <script src="{{ asset('/js/form-select2.js') }}"></script>
+  <script src="{{ asset('/plugins/sweet-alerts/js/sweetalert.min.js') }}"></script>
+  <script src="{{ asset('/plugins/sweet-alerts/sweetalert.js') }}"></script>
   <script src="{{ asset('/js/index.js') }}"></script>
   @yield('page-script')
   <script>
@@ -236,6 +243,7 @@
   </script>
   <!-- Main JS-->
   <script src="{{ asset('/js/main.js') }}"></script>
+  <script src="{{ asset('/js/custom.js') }}"></script>
 </body>
 
 </html>

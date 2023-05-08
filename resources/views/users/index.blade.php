@@ -66,7 +66,7 @@
 												<a href="{{ route('edit_user', ['id' => $user->id]) }}" class="btn btn-primary">
 													<i class="lni lni-pencil"></i>
 												</a>
-												<a href="{{ route('delete_user', ['id' => $user->id]) }}" class="btn btn-danger">
+												<a href="javascript:;" userId="{{ $user->id }}" class="btn btn-danger confirmDelete">
 													<i class="lni lni-trash"></i>
 												</a>
 											</div>
@@ -81,4 +81,54 @@
     </div>
     <!-- end page content-->
 </div>
+@endsection
+@section('page-script')
+<script>
+	$(document).on('click','.confirmDelete', function() {
+		var $this = $(this);
+    	var userId = $(this).attr('userId');
+
+		swal({
+	        title: "Are you sure?",
+	        text: "You will not be able to revert this Record!",
+	        type: "warning",
+	        showCancelButton: true,
+	        confirmButtonClass: "btn-danger",
+	        cancelButtonClass: "btn-secondary",
+	        confirmButtonText: "Yes, Delete it!",
+	        cancelButtonText: "No, Cancel Please!",
+	        closeOnConfirm: true,
+	        closeOnCancel: false
+	    },function(isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                url: '/delete_user',
+                type: 'POST',
+                data: {
+                	"_token": "{{ csrf_token() }}",
+                	userId: userId
+                },
+                success:function(response) {
+                    if (response.status==true) {
+                        $this.closest('tr').css('background-color', 'red').fadeOut('slow');
+                        if ($($this.closest('tr').prev()).hasClass("parent")) {
+                            $this.closest('tr').prev().css('background-color', 'red').fadeOut('slow');
+                        }
+                        Notification('success',response.message);
+                    }
+                },error:function() {
+                    alert('Error');
+                }
+            });   
+        }else {
+            swal({
+               title:'Success', 
+               text:'Record not deleted, Your Record is still Save',
+               confirmButtonClass: "btn-success", 
+               type: "success"
+            });
+        }
+    });
+});
+</script>
 @endsection
