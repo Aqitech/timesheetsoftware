@@ -22,68 +22,73 @@
           	<!--end breadcrumb-->
           	<h6 class="mb-0 text-uppercase">All {{ $title }}</h6>
 				<hr/>
-				<div class="card">
-					<div class="card-body">
-						<div class="table-responsive">
-							<table id="example" class="table table-striped table-bordered" style="width:100%">
-								<thead>
-									<tr>
-										<th>User Type</th>
-										<th>Name</th>
-										<th>Designation</th>
-										<th>Shift Start</th>
-										<th>Shift End</th>
-										<th>Status</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									@foreach($users as $user)
-									<tr>
-										<td>{{ ucfirst($user->type->type) }}</td>
-										<td>{{ ucfirst($user->name) }}</td>
-										<td>{{ ucfirst($user->designation) }}</td>
-										<td>{{ $user->start_time }}</td>
-										<td>{{ $user->end_time }}</td>
-										<td>
-											@if($user->status == 'A')
-											@php 
-												$class1 = 'btn btn-success';
-												$class2 = 'lni lni-thumbs-up';
-											@endphp
-											@else
-											@php
-												$class1 = 'btn btn-danger';
-												$class2 = 'lni lni-thumbs-down';
-											@endphp
-											@endif
-											<a href="{{ route('user_status', ['id' => $user->id]) }}" class="{{ $class1 }}">
-												<i class="{{ $class2 }}"></i>
+			<div class="card">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table id="userTable" class="table table-striped table-bordered" style="width:100%">
+							<thead>
+								<tr>
+									<th>User Type</th>
+									<th>Name</th>
+									<th>Designation</th>
+									<th>Shift Start</th>
+									<th>Shift End</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($users as $user)
+								<tr>
+									<td>{{ ucfirst($user->type->type) }}</td>
+									<td>{{ ucfirst($user->name) }}</td>
+									<td>{{ ucfirst($user->designation) }}</td>
+									<td>{{ $user->start_time }}</td>
+									<td>{{ $user->end_time }}</td>
+									<td>
+										@if($user->status == 'A')
+										@php 
+											$class1 = 'btn btn-success';
+											$class2 = 'lni lni-thumbs-up';
+										@endphp
+										@else
+										@php
+											$class1 = 'btn btn-danger';
+											$class2 = 'lni lni-thumbs-down';
+										@endphp
+										@endif
+										<a href="{{ route('user_status', ['id' => $user->id]) }}" class="{{ $class1 }}">
+											<i class="{{ $class2 }}"></i>
+										</a>
+									</td>
+									<td>
+										<div class="d-flex justify-content-evenly">
+											<a href="{{ route('edit_user', ['id' => $user->id]) }}" class="btn btn-primary">
+												<i class="lni lni-pencil"></i>
 											</a>
-										</td>
-										<td>
-											<div class="d-flex justify-content-evenly">
-												<a href="{{ route('edit_user', ['id' => $user->id]) }}" class="btn btn-primary">
-													<i class="lni lni-pencil"></i>
-												</a>
-												<a href="javascript:;" userId="{{ $user->id }}" class="btn btn-danger confirmDelete">
-													<i class="lni lni-trash"></i>
-												</a>
-											</div>
-										</td>
-									</tr>
-									@endforeach
-								</tbody>
-							</table>
-						</div>
+											<a href="javascript:;" userId="{{ $user->id }}" class="btn btn-danger confirmDelete">
+												<i class="lni lni-trash"></i>
+											</a>
+										</div>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
 					</div>
 				</div>
+			</div>
     </div>
     <!-- end page content-->
 </div>
 @endsection
 @section('page-script')
 <script>
+	$(document).ready(function() {
+		$('#userTable').DataTable({
+			ordering: false,
+		});
+	});
 	$(document).on('click','.confirmDelete', function() {
 		var $this = $(this);
     	var userId = $(this).attr('userId');

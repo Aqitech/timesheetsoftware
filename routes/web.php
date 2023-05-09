@@ -32,6 +32,7 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::controller(UserController::class)->group(function() {
     Route::get('/profile/{id}', 'profile')->name('profile');
+    Route::post('/update_theme', 'update_theme')->name('update_theme');
 
     Route::get('/users', 'users')->name('users');
     Route::get('/add_user', 'add_user')->name('add_user');

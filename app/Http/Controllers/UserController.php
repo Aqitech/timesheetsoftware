@@ -8,26 +8,39 @@ use Illuminate\Support\Str;
 use App\Models\UserType;
 use App\Models\User;
 use Session;
+use Auth;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('admin');
     }
 
     public function users() {
-        $title = 'Users';
-        $users = User::where('is_deleted', 'N')->get();
+        if (Auth::User()->type_id == 1) {
+            $title = 'Users';
+            $users = User::where('is_deleted', 'N')->get();
 
-        return view('users.index')->with(compact('title', 'users'));
+            return view('users.index')->with(compact('title', 'users')); 
+        }else{
+            Session::flash('error', 'You do not have permission to access this route');
+
+            return redirect()->back();
+        }
+        
     }
 
     public function add_user() {
-        $title = 'Add User';
-        $userTypes = UserType::all();
+        if (Auth::User()->type_id == 1) {
+            $title = 'Add User';
+            $userTypes = UserType::all();
 
-        return view('users.add_user')->with(compact('title','userTypes'));
+            return view('users.add_user')->with(compact('title','userTypes'));
+        }else{
+            Session::flash('error', 'You do not have permission to access this route');
+
+            return redirect()->back();
+        }
     }
 
     public function store_user(Request $request) {
@@ -61,11 +74,17 @@ class UserController extends Controller
     }
 
     public function edit_user($id) {
-        $title = 'Edit User';
-        $user = User::find($id);
-        $userTypes = UserType::all();
+        if (Auth::User()->type_id == 1) {
+            $title = 'Edit User';
+            $user = User::find($id);
+            $userTypes = UserType::all();
 
-        return view('users.edit_user')->with(compact('title','user','userTypes'));
+            return view('users.edit_user')->with(compact('title','user','userTypes'));
+        }else{
+            Session::flash('error', 'You do not have permission to access this route');
+
+            return redirect()->back();
+        }
     }
 
     public function update_user(Request $request, $id) {
@@ -127,5 +146,9 @@ class UserController extends Controller
         $profile = User::find($id);
 
         return view('users.profile')->with(compact('title','profile'));
+    }
+
+    public function update_theme(Request $request) {
+        
     }
 }

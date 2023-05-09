@@ -67,6 +67,7 @@
             <div class="menu-title">Dashboard</div>
           </a>
         </li>
+        @if(Auth::User()->type_id == 1)
         <li>
           <a href="{{ route('users') }}">
             <div class="parent-icon">
@@ -75,6 +76,7 @@
             <div class="menu-title">Users</div>
           </a>
         </li>
+        @endif
         <li>
           <a href="{{ route('timesheet',['id' => Auth::User()->id]) }}">
             <div class="parent-icon">
@@ -112,7 +114,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link dark-mode-icon" href="javascript:;">
+              <a class="nav-link dark-mode-icon" href="javascript:;" id="theme_color" userId="{{ Auth::User()->id }}" themeStatus="{{ Auth::User()->theme }}">
                 <div class="mode-icon">
                   <ion-icon name="moon-sharp"></ion-icon>
                 </div>
@@ -239,6 +241,26 @@
         @elseif(Session::has('warning'))
             toastr.warning('{{ Session::get('warning') }}');
         @endif
+    });
+    $(document).on('click','#theme_color', function() {
+      var $this = $(this);
+      var userId = $(this).attr('userId');
+      var themeStatus = $(this).attr('themeStatus');
+      $.ajax({
+        url = '/update_theme',
+        type: 'POST',
+        data: {
+          "_token": "{{ csrf_token() }}",
+          userId: userId,
+          themeStatus: themeStatus
+        },
+        success:function(data) {
+            $this.attr('themeStatus',data.color);
+            Notification('success',data.message);
+        },error:function() {
+            alert('Error');
+        }
+      });
     });
   </script>
   <!-- Main JS-->

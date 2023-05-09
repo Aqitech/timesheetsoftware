@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('end_time');
             $table->enum('status', ['A', 'D']);
             $table->enum('is_deleted', ['N', 'Y']);
+            $table->enum('theme', ['L', 'D']);
             $table->rememberToken();
             $table->timestamps();
         });
