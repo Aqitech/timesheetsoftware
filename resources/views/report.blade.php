@@ -177,7 +177,7 @@
                 bFilter: false,
                 ordering: false,
                 buttons: [
-                    'excel'
+                    { extend: 'excel', text: 'Download in Excel' }
                 ]
             } );
         }

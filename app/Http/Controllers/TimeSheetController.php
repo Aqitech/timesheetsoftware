@@ -25,6 +25,12 @@ class TimeSheetController extends Controller {
         $endTime = $user->end_time;
         $start = \Carbon\Carbon::parse($startTime);
         $end = \Carbon\Carbon::parse($endTime);
+
+        // Check if end time is earlier than start time and adjust if necessary
+        if ($end->lt($start)) {
+            $end->addDay();
+        }
+
         $interval = $start->diffInMinutes($end);
         $intervals = ceil($interval / 30);
 
@@ -82,6 +88,12 @@ class TimeSheetController extends Controller {
         $endTime = $user->end_time;
         $start = \Carbon\Carbon::parse($startTime);
         $end = \Carbon\Carbon::parse($endTime);
+
+        // Check if end time is earlier than start time and adjust if necessary
+        if ($end->lt($start)) {
+            $end->addDay();
+        }
+
         $interval = $start->diffInMinutes($end);
         $intervals = ceil($interval / 30);
         $thTags = '';
