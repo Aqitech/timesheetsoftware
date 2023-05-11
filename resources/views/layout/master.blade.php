@@ -22,6 +22,8 @@
   <link href="{{ asset('/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
   <link href="{{ asset('/plugins/sweet-alerts/css/sweetalert.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset('/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css') }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <!-- CSS Files -->
   <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -224,6 +226,8 @@
   <script src="{{ asset('/plugins/datetimepicker/js/picker.js') }}"></script>
   <script src="{{ asset('/plugins/datetimepicker/js/picker.time.js') }}"></script>
   <script src="{{ asset('/plugins/datetimepicker/js/picker.date.js') }}"></script>
+  <script src="{{ asset('/plugins/bootstrap-material-datetimepicker/js/moment.min.js') }}"></script>
+  <script src="{{ asset('/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js') }}"></script>
   <script src="{{ asset('/js/form-date-time-pickes.js') }}"></script>
   <script src="{{ asset('/plugins/select2/js/select2.min.js') }}"></script>
   <script src="{{ asset('/js/form-select2.js') }}"></script>
